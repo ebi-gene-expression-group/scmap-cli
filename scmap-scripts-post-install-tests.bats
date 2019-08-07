@@ -42,6 +42,20 @@
     echo "output = ${output}"
  
     [ "$status" -eq 0 ]
-    [ -f  "$test_sce" ]
+    [ -f  "$select_features_sce" ]
 }
 
+
+@test "Project one dataset to another." {
+    if [ "$use_existing_outputs" = 'true' ] && [ -f "$project_sce" ]; then
+        skip "$project_sce exists and use_existing_outputs is set to 'true'"
+    fi
+
+    run rm -rf $project_sce && scmap-scmap-cluster.R -i $index_cluster_sce -p $test_sce --threshold $cluster_similarity_threshold --output-text-file $project_csv --output-object-file $project_sce
+
+    echo "status = ${status}"
+    echo "output = ${output}"
+ 
+    [ "$status" -eq 0 ]
+    [ -f  "$project_sce" ]
+}

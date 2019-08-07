@@ -57,6 +57,8 @@ export select_features_sce=$output_dir'/select_features.rds'
 export select_features_plot=$output_dir'/select_features.png'
 export index_cluster_sce=$output_dir'/index_cluster.rds'
 export index_cluster_plot=$output_dir'/index_cluster.png'
+export project_sce=$output_dir'/project_cluster.rds'
+export project_csv=$output_dir'/project_cluster.csv'
 
 ## Test parameters- would form config file in real workflow. DO NOT use these
 ## as default values without being sure what they mean.
@@ -65,6 +67,7 @@ export index_cluster_plot=$output_dir'/index_cluster.png'
 
 export n_features=500
 export cluster_col='cell_type1'
+export cluster_similarity_threshold=0.7
 
 ################################################################################
 # Test individual scripts
