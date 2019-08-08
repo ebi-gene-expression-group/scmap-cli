@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript 
 
-# Projection of one dataset to another.
+# For each cell in a query dataset, we search for the nearest neighbours by cosine distance within a collection of reference datasets..
 
 # Load optparse we need to check inputs
 suppressPackageStartupMessages(require(optparse))
@@ -25,29 +25,29 @@ option_list = list(
     help = "'SingleCellExperiment' object to project."
   ),
   make_option(
-    c("-r", "--threshold"),
+    c("-w", "--number-nearest-neighbours"),
     action = "store",
-    default = 0.7,
+    default = 10,
     type = 'numeric',
-    help = 'Threshold on similarity (or probability for SVM and RF).'
+    help = 'A positive integer specifying the number of nearest neighbours to find.'
   ),
   make_option(
-    c("-t", "--output-text-file"),
+    c("-c", "--closest-cells-text-file"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "File name in which to text-format cell type assignments."
+    help = "File name in which to store the top cell IDs of the cells of the reference dataset that a given cell of the projection dataset is closest to."
   ),
   make_option(
-    c("-o", "--output-object-file"),
+    c("-s", "--closest-cells-similarities-text-file"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "File name in which to store serialized R object of type 'SingleCellExperiment'."
+    help = "File name in which to store cosine similarities for the top cells of the reference dataset that a given cell of the projection dataset is closest to."
   )
 )
 
-opt <- wsc_parse_args(option_list, mandatory = c('index_object_file', 'projection_object_file', 'output_object_file', 'output_text_file'))
+opt <- wsc_parse_args(option_list, mandatory = c('index_object_file', 'projection_object_file', 'closest_cells_text_file', 'closest_cells_similarities_text_file'))
 
 # Once arguments are satisfcatory, load scmap package
 
@@ -69,17 +69,17 @@ project_sce <- readRDS(opt$projection_object_file)
 
 # Run the projection
 
-scmapCluster_results <- scmapCluster(
+scmapCell_results <- scmapCell(
   projection = project_sce, 
   index_list = list(
-    metadata(index_sce)$scmap_cluster_index
+    metadata(index_sce)$scmap_cell_index
   )
 )
 
 # Output format anticipates multiple input indexes, let's assume a single input
 # for now and convert list to a single matrix
 
-scmapCluster_results <- data.frame(do.call(cbind, lapply(scmapCluster_results, function(x){
+scmapCell_results <- data.frame(do.call(cbind, lapply(scmapCell_results, function(x){
   if(class(x) == 'matrix'){
     x[,1]
   }else{
@@ -87,13 +87,9 @@ scmapCluster_results <- data.frame(do.call(cbind, lapply(scmapCluster_results, f
   }
 })), check.names = FALSE)
 
-colData(project_sce) <- cbind(colData(project_sce), scmapCluster_results)
-
 # Print introspective information
 cat(capture.output(project_sce), sep='\n')
 
 # Output assignments to a text format
-write.csv(cbind(cell = colnames(project_sce), scmapCluster_results), file=opt$output_text_file, quote = FALSE)
-
-# Output to a serialized R object
-saveRDS(project_sce, file = opt$output_object_file)
+write.csv(scmapCell_results[[1]]$cells, file=opt$closest_cells_text_file, quote = FALSE)
+write.csv(scmapCell_results[[1]]$similarities, file=opt$closest_cells_similarities_text_file, quote = FALSE)

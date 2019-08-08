@@ -60,6 +60,11 @@ export index_cluster_plot=$output_dir'/index_cluster.png'
 export project_sce=$output_dir'/project_cluster.rds'
 export project_csv=$output_dir'/project_cluster.csv'
 
+export index_cell_sce=$output_dir'/index_cell.rds'
+export project_cell_sce=$output_dir'/project_cell.rds'
+export closest_cells_text_file=$output_dir'/closest_cells.csv'
+export closest_cells_similarities_text_file=$output_dir'/closest_cells_similarities.csv'
+
 ## Test parameters- would form config file in real workflow. DO NOT use these
 ## as default values without being sure what they mean.
 
@@ -68,6 +73,10 @@ export project_csv=$output_dir'/project_cluster.csv'
 export n_features=500
 export cluster_col='cell_type1'
 export cluster_similarity_threshold=0.7
+
+export cells_number_chunks=50
+export cells_number_clusters=9
+export cell_number_nearest_neighbours=5
 
 ################################################################################
 # Test individual scripts
