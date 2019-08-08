@@ -71,6 +71,7 @@ project_sce <- readRDS(opt$projection_object_file)
 
 scmapCell_results <- scmapCell(
   projection = project_sce, 
+  w = opt$number_nearest_neighbours,
   index_list = list(
     metadata(index_sce)$scmap_cell_index
   )
