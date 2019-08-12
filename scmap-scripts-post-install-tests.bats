@@ -77,7 +77,7 @@
         skip "$closest_cells_similarities_text_file exists and use_existing_outputs is set to 'true'"
     fi
 
-    run rm -rf $closest_cells_similarities_text_file && scmap-scmap-cell.R -i $index_cell_sce -p $test_sce --number-nearest-neighbours $cell_number_nearest_neighbours --closest-cells-text-file $closest_cells_text_file --closest-cells-similarities-text-file $closest_cells_similarities_text_file
+    run rm -rf $closest_cells_similarities_text_file && scmap-scmap-cell.R -i $index_cell_sce -p $test_sce --number-nearest-neighbours $cell_number_nearest_neighbours --cluster-col $cluster_col --output-object-file $closest_cells_clusters_sce --output-clusters-text-file $closest_cells_clusters_csv --closest-cells-text-file $closest_cells_text_file --closest-cells-similarities-text-file $closest_cells_similarities_text_file
 
     echo "status = ${status}"
     echo "output = ${output}"

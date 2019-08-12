@@ -64,6 +64,8 @@ export index_cell_sce=$output_dir'/index_cell.rds'
 export project_cell_sce=$output_dir'/project_cell.rds'
 export closest_cells_text_file=$output_dir'/closest_cells.csv'
 export closest_cells_similarities_text_file=$output_dir'/closest_cells_similarities.csv'
+export closest_cells_clusters_sce=$output_dir'/closest_cells_clusters.rds'
+export closest_cells_clusters_csv=$output_dir'/closest_cells_clusters.csv'
 
 ## Test parameters- would form config file in real workflow. DO NOT use these
 ## as default values without being sure what they mean.
