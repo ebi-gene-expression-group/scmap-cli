@@ -45,8 +45,6 @@ opt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_ob
 opt$number_chunks <- ifelse(opt$number_chunks == 'NULL', NULL, opt$number_chunks)
 opt$number_clusters <- ifelse(opt$number_clusters == 'NULL', NULL, opt$number_clusters)
 
-saveRDS(opt, "opt.rds")
-
 # Once arguments are satisfcatory, load scmap package
 
 suppressPackageStartupMessages(require(scmap))
