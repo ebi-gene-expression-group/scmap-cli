@@ -17,7 +17,9 @@ scmap-make-test-data.R --output-object-file <output SingleCellExperiment in .rds
 ### Find the most informative features (genes/transcripts) for projection
 
 ```
-scmap-select-features.R --input-object-file <input SingleCellExperiment in .rds format>  --n-features <number features to use> --output-object-file <output SingleCellExperiment in .rds format> --output-plot-file <optional file name in .png format, for feature selection plot>
+scmap-select-features.R --input-object-file <input SingleCellExperiment in .rds format>  \
+    --n-features <number features to use> --output-object-file <output SingleCellExperiment in .rds format> \
+    --output-plot-file <optional file name in .png format, for feature selection plot>
 ```
 
 ### Calculate centroids of each cell type and merge them into a single table.
@@ -25,7 +27,10 @@ scmap-select-features.R --input-object-file <input SingleCellExperiment in .rds 
 Here we generate a summary representation of each cluster in the indexed dataset:
 
 ```
-scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds format>  --cluster-col <column name where cell types are stored> --output-object-file <output SingleCellExperiment in .rds format> --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
+scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds format> \
+     --cluster-col <column name where cell types are stored> \
+    --output-object-file <output SingleCellExperiment in .rds format> \
+    --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
 ```
 
 ### Project one dataset to another 
@@ -33,7 +38,10 @@ scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds fo
 In this step we find the cluster medoid of the index dataset closest to the cells of a query:
 
 ```
-scmap-scmap-cluster.R -i <cluster-indexed SingleCellExperiment in .rds format> -p <query SingleCellExperiment in .rds format> --threshold <cluster similarity threshold> --output-text-file <csv-format file to store results> --output-object-file <output SingleCellExperiment in .rds format>
+scmap-scmap-cluster.R -i <cluster-indexed SingleCellExperiment in .rds format> \
+    -p <query SingleCellExperiment in .rds format> --threshold <cluster similarity threshold> \
+    --output-text-file <csv-format file to store results> \
+    --output-object-file <output SingleCellExperiment in .rds format>
 ```
 
 ### Create an index for a dataset to enable fast approximate nearest neighbour search
@@ -41,7 +49,10 @@ scmap-scmap-cluster.R -i <cluster-indexed SingleCellExperiment in .rds format> -
 Here we generate a cell-wise index:
 
 ```
-scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds format> --number-chunks <number of chunks into which the expr matrix is split> --number-clusters <number of clusters per group for k-means clustering> --output-object-file <output SingleCellExperiment in .rds format>
+scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds format> \
+    --number-chunks <number of chunks into which the expr matrix is split> \
+    --number-clusters <number of clusters per group for k-means clustering> \
+    --output-object-file <output SingleCellExperiment in .rds format>
 ```
 
 ### For each cell in a query dataset, search for the nearest neighbours by cosine distance within a collection of reference datasets
@@ -49,5 +60,11 @@ scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds forma
 Here we find the nearest 'n' neighbours in an index dataset for the cells of a query dataset. Optionally (when --cluster-col is set and corresponds to a column in the index dataset's colData()), generate a cluster identity for query cells via the cluster inenties in the index:
 
 ```
-scmap-scmap-cell.R -i $index_cell_sce -p <input SingleCellExperiment in .rds format> --number-nearest-neighbours <number nearest neighbours> --cluster-col <column name where cell types are stored> --output-object-file <output SingleCellExperiment in .rds format> --output-clusters-text-file <file to store optional cluster identities> --closest-cells-text-file <csv file to store closest cells> --closest-cells-similarities-text-file <csv file to store similarity values>
+scmap-scmap-cell.R -i $index_cell_sce -p <input SingleCellExperiment in .rds format> \
+    --number-nearest-neighbours <number nearest neighbours> \
+    --cluster-col <column name where cell types are stored> \
+    --output-object-file <output SingleCellExperiment in .rds format> \
+    --output-clusters-text-file <file to store optional cluster identities> \
+    --closest-cells-text-file <csv file to store closest cells> \
+    --closest-cells-similarities-text-file <csv file to store similarity values>
 ```
