@@ -9,7 +9,7 @@ script_name=$0
 # parameterisation for a workflow.
 
 function usage {
-    echo "usage: r-seurat-workflow-post-install-tests.sh [action] [use_existing_outputs]"
+    echo "usage: scmap-scripts-post-install-tests.sh [action] [use_existing_outputs]"
     echo "  - action: what action to take, 'test' or 'clean'"
     echo "  - use_existing_outputs, 'true' or 'false'"
     exit 1
