@@ -31,7 +31,7 @@ install:
 before_script:
     - export PATH=`pwd`:$PATH
 
-script: ./scmap-scripts-post-install-tests.sh
+script: ./scmap-cli-post-install-tests.sh
 
 cache:
   directories:
