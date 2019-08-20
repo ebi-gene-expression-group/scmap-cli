@@ -76,6 +76,7 @@ export n_features=500
 export cluster_col='cell_type1'
 export cluster_similarity_threshold=0.7
 
+export random_seed=1
 export cells_number_chunks=50
 export cells_number_clusters=9
 export cell_number_nearest_neighbours=5

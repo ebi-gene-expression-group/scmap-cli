@@ -32,6 +32,13 @@ option_list = list(
     help = 'Number of clusters per group for k-means clustering.'
   ),
   make_option(
+    c("-r", "--random-seed"),
+    action = "store",
+    default = NULL,
+    type = 'numeric',
+    help = 'Set random seed to make scmap-cell reproducible.'
+  ),
+  make_option(
     c("-o", "--output-object-file"),
     action = "store",
     default = NA,
@@ -57,6 +64,11 @@ if ( ! file.exists(opt$input_object_file)){
 
 # Read R object
 SingleCellExperiment <- readRDS(opt$input_object_file)
+
+# Set random seed
+if ( ! is.null(opt$random_seed)){
+    set.seed(1)
+}
 
 # Run indexing function
 SingleCellExperiment <- indexCell(SingleCellExperiment, M = opt$number_chunks, k = opt$number_clusters)
