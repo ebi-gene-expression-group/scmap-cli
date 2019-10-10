@@ -20,21 +20,21 @@ option_list = list(
   make_option(
     c("-m", "--number-chunks"),
     action = "store",
-    default = NULL,
+    default = NA,
     type = 'numeric',
     help = 'Number of chunks into which the expr matrix is split.'
   ),
   make_option(
     c("-k", "--number-clusters"),
     action = "store",
-    default = NULL,
+    default = NA,
     type = 'numeric',
     help = 'Number of clusters per group for k-means clustering.'
   ),
   make_option(
     c("-r", "--random-seed"),
     action = "store",
-    default = NULL,
+    default = NA,
     type = 'numeric',
     help = 'Set random seed to make scmap-cell reproducible.'
   ),
@@ -49,8 +49,8 @@ option_list = list(
 
 opt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_object_file'))
 
-opt$number_chunks <- ifelse(opt$number_chunks == 'NULL', NULL, opt$number_chunks)
-opt$number_clusters <- ifelse(opt$number_clusters == 'NULL', NULL, opt$number_clusters)
+opt$number_chunks <- if(is.na(opt$number_chunks)) NULL else {opt$number_chunks}
+opt$number_clusters <- if(is.na(opt$number_clusters)) NULL else {opt$number_clusters}
 
 # Once arguments are satisfcatory, load scmap package
 
@@ -66,7 +66,7 @@ if ( ! file.exists(opt$input_object_file)){
 SingleCellExperiment <- readRDS(opt$input_object_file)
 
 # Set random seed
-if ( ! is.null(opt$random_seed)){
+if (is.na(opt$random_seed)){
     set.seed(1)
 }
 
