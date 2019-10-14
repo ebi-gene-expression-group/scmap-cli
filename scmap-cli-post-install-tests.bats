@@ -63,7 +63,12 @@
         skip "$index_cell_sce exists and use_existing_outputs is set to 'true'"
     fi
    
-    run rm -f $index_cell_sce && scmap-index-cell.R --random-seed $random_seed --input-object-file $select_features_sce --number-chunks $cells_number_chunks --number-clusters $cells_number_clusters --output-object-file $index_cell_sce
+    run rm -f $index_cell_sce && scmap-index-cell.R\
+                                 --input-object-file $select_features_sce\
+                                 --output-object-file $index_cell_sce\
+                                 --number-chunks $cells_number_chunks\
+                                 --number-clusters $cells_number_clusters\
+                                 --random-seed $random_seed
 
     echo "status = ${status}"
     echo "output = ${output}"

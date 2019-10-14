@@ -95,5 +95,4 @@ export use_existing_outputs
 tests_file="${script_name%.*}".bats
 
 # Execute the bats tests
-
 $tests_file

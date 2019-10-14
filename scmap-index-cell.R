@@ -49,8 +49,12 @@ option_list = list(
 
 opt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_object_file'))
 
-opt$number_chunks <- ifelse(opt$number_chunks == 'NULL', NULL, opt$number_chunks)
-opt$number_clusters <- ifelse(opt$number_clusters == 'NULL', NULL, opt$number_clusters)
+if (!is.null(opt$number_chunks) && opt$number_chunks == 0){
+   opt$number_chunks = NULL
+}
+if (!is.null(opt$number_clusters) && opt$number_clusters == 0){
+    opt$number_clusters = NULL
+}
 
 # Once arguments are satisfcatory, load scmap package
 
@@ -66,7 +70,7 @@ if ( ! file.exists(opt$input_object_file)){
 SingleCellExperiment <- readRDS(opt$input_object_file)
 
 # Set random seed
-if ( ! is.null(opt$random_seed)){
+if (is.null(opt$random_seed)){
     set.seed(1)
 }
 
