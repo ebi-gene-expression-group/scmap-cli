@@ -20,14 +20,14 @@ option_list = list(
   make_option(
     c("-m", "--number-chunks"),
     action = "store",
-    default = NA,
+    default = 0,
     type = 'numeric',
     help = 'Number of chunks into which the expr matrix is split.'
   ),
   make_option(
     c("-k", "--number-clusters"),
     action = "store",
-    default = NA,
+    default = 0,
     type = 'numeric',
     help = 'Number of clusters per group for k-means clustering.'
   ),
@@ -49,8 +49,10 @@ option_list = list(
 
 opt <- wsc_parse_args(option_list, mandatory = c('input_object_file', 'output_object_file'))
 
-opt$number_chunks <- if(is.na(opt$number_chunks)) NULL else {opt$number_chunks}
-opt$number_clusters <- if(is.na(opt$number_clusters)) NULL else {opt$number_clusters}
+
+
+
+
 
 # Once arguments are satisfcatory, load scmap package
 
