@@ -12,8 +12,8 @@ A quick way to build an SCE object from 10X Genomics directory and SDFR metadata
 ```
 10X-to-sce.R --input-10x-dir <path to the 10X directory with CPM-normalised
              expression matrix>\
-             --metadata-file <path to SDRF metadata file in .txt format. The first column must be cell identifier corresponding to column
-             names in the expression matrix; the second column must be inferred cell type. Further columns may be included if required.>\
+             --metadata-file <path to SDRF metadata file in .txt format. The first column must be cell identifier corresponding to column names in the expression matrix; 
+             the second column must be inferred cell type. Further columns may be included if required.>\
              --output-object <path to the produced CDS object in .rds format>
 ```
 
