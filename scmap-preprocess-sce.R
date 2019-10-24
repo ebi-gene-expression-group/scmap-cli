@@ -43,18 +43,18 @@ assays(SingleCellExperiment) <- lapply(assays(SingleCellExperiment), function(x)
     x
 })
 
-assay_names <- names(assays(SingleCellExperiment)
+assay_names <- names(assays(SingleCellExperiment))
 
 # We need counts for dropout detection. If normcounts is present, just reassign those
 
 if (! 'counts' %in% assay_names){
     if ( 'normcounts' %in% assay_names){
-        names(assays(sce))[names(assays(sce)) == 'normcounts'] <- 'counts'
+        names(assays(SingleCellExperiment))[names(assays(SingleCellExperiment)) == 'normcounts'] <- 'counts'
+        assay_names <- names(assays(SingleCellExperiment))
     }else{
-        stop("Neither 'counts' nor 'normcounts' are populated in input object, these are necessary for dropout rate calculations and I can't proceed without them")
+        stop("Neither 'counts' nor 'normcounts' are populated in input object. An unlogged matrix is necessary for dropout rate calculations and I can't proceed without one of these.")
     }
 }
-
 # We need the logcounts() slot, so calculate it if it's not present
 if (! 'logcounts' %in% assay_names){
     if("normcounts" %in% assay_names ){
