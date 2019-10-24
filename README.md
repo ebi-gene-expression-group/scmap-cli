@@ -6,6 +6,14 @@ This is a collection of R scripts to allow workflow-driven execution of differnt
 
 Currently wrapped scmap functions are described below. Each script has usage insructions available via --help, consult function documentation in scmap for further details.
 
+### Preprocess SCE object for scmap pipeline
+This script makes the necessary changes to the SCE object required by the scmap workflow, including 'un-sparsing' and log-normalising the expression matrix.    
+
+```
+scmap-preprocess-sce.R --input-object <path to the SCE object>\
+                       --output-sce-object <path to the updated SCE object in .rds format>
+```
+
 ### Extract test data
 
 Input to the workflow will be a serialised single-cell experiment object. You can generate one for testing (derived from the package-provided test data) like:

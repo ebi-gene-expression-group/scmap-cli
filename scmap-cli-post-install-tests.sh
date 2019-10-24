@@ -53,6 +53,7 @@ mkdir -p $output_dir
 ################################################################################
 
 export test_sce=$output_dir'/test_sce.rds'
+export test_sce_processed=$output_dir'/test_sce_processed.rds'
 export select_features_sce=$output_dir'/select_features.rds'
 export select_features_plot=$output_dir'/select_features.png'
 export index_cluster_sce=$output_dir'/index_cluster.rds'
