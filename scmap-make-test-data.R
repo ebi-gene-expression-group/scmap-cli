@@ -25,7 +25,7 @@ suppressPackageStartupMessages(require(SingleCellExperiment))
 suppressPackageStartupMessages(require(scmap))
 
 # Create the test object
-SingleCellExperiment <- SingleCellExperiment(assays = list(normcounts = as.matrix(yan)), colData = ann)
+SingleCellExperiment <- SingleCellExperiment(assays = list(normcounts = as(as.matrix(yan), "dgCMatrix")), colData = ann)
 
 # Print introspective information
 cat(capture.output(SingleCellExperiment), sep='\n')
