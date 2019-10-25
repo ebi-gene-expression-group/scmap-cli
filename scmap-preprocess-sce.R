@@ -35,16 +35,34 @@ if(!file.exists(opt$input_object)){
 # read in the SCE object 
 SingleCellExperiment <- readRDS(opt$input_object)
 
-# un-sparse and log-transform counts
-if("normcounts" %in% names(assays(SingleCellExperiment))){
-    normcounts(SingleCellExperiment) <- as.matrix(normcounts(SingleCellExperiment))
-    logcounts(SingleCellExperiment) <- log2(normcounts(SingleCellExperiment) + 1)
-} else if("counts" %in% names(assays(SingleCellExperiment))) {
-    counts(SingleCellExperiment) <- as.matrix(counts(SingleCellExperiment))
-    logcounts(SingleCellExperiment) <- log2(counts(SingleCellExperiment) + 1)
-} else{
-    stop("Incrorrect assay names in SCE object")
-}  
+# Matrix-ify any e.g. sparse matrices in assays
+assays(SingleCellExperiment) <- lapply(assays(SingleCellExperiment), function(x){
+    if (! is.matrix(x)){
+        x <- as.matrix(x)
+    }
+    x
+})
+
+assay_names <- names(assays(SingleCellExperiment))
+
+# We need counts for dropout detection. If normcounts is present, just reassign those
+
+if (! 'counts' %in% assay_names){
+    if ( 'normcounts' %in% assay_names){
+        names(assays(SingleCellExperiment))[names(assays(SingleCellExperiment)) == 'normcounts'] <- 'counts'
+        assay_names <- names(assays(SingleCellExperiment))
+    }else{
+        stop("Neither 'counts' nor 'normcounts' are populated in input object. An unlogged matrix is necessary for dropout rate calculations and I can't proceed without one of these.")
+    }
+}
+# We need the logcounts() slot, so calculate it if it's not present
+if (! 'logcounts' %in% assay_names){
+    if("normcounts" %in% assay_names ){
+        logcounts(SingleCellExperiment) <- log2(normcounts(SingleCellExperiment) + 1)
+    } else if("counts" %in% names(assays(SingleCellExperiment))) {
+        logcounts(SingleCellExperiment) <- log2(counts(SingleCellExperiment) + 1)
+    } 
+}
 
 # use gene names as feature symbols
 rowData(SingleCellExperiment)$feature_symbol <- rownames(SingleCellExperiment)
