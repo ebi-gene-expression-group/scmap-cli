@@ -107,3 +107,25 @@
     [ "$status" -eq 0 ]
     [ -f  "$closest_cells_similarities_text_file" ]
 }
+
+
+@test "Obtain standard output" {
+    if [ "$use_existing_outputs" = 'true' ] && [ -f "$scmap_output_tbl" ]; then
+        skip "$scmap_output_tbl exists and use_existing_outputs is set to 'true'"
+    fi
+
+    run rm -rf $scmap_output_tbl && scmap_get_std_output.R\
+                                        --predictions-file $closest_cells_clusters_csv\
+                                        --output-table $scmap_output_tbl\
+                                        --include-scores
+
+    echo "status = ${status}"
+    echo "output = ${output}"
+ 
+    [ "$status" -eq 0 ]
+    [ -f  "$scmap_output_tbl" ]
+
+}
+
+
+
