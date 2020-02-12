@@ -6,7 +6,7 @@ This is a collection of R scripts to allow workflow-driven execution of differnt
 
 Currently wrapped scmap functions are described below. Each script has usage insructions available via --help, consult function documentation in scmap for further details.
 
-### Preprocess SCE object for scmap pipeline
+### Preprocess SCE object for scmap pipeline
 This script makes the necessary changes to the SCE object required by the scmap workflow, including 'un-sparsing' and log-normalising the expression matrix.    
 
 ```
@@ -76,3 +76,15 @@ scmap-scmap-cell.R -i $index_cell_sce -p <input SingleCellExperiment in .rds for
     --closest-cells-text-file <csv file to store closest cells> \
     --closest-cells-similarities-text-file <csv file to store similarity values>
 ```
+
+### Get standard output for downstream processing and analysis as part of various workflows
+
+```
+scmap_get_std_output.R\
+            --predictions-file <Path to the predictions file in text format>\
+            --output-table <Path to the final output file in text format>\
+            --include-scores <Boolean: Should prediction scores be included in output? Default: FALSE>\
+            --sim-col-name <Column name of similarity scores>
+```
+
+
