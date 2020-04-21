@@ -118,8 +118,11 @@
     run rm -rf $scmap_output_tbl && scmap_get_std_output.R\
                                         --predictions-file $closest_cells_clusters_csv\
                                         --output-table $scmap_output_tbl\
+<<<<<<< HEAD
                                         --index $index_cluster_sce\
                                         --tool 'scmap-cell'\
+=======
+>>>>>>> 7733ebe8535956bb4b9212311c647d47d8313c79
                                         --include-scores
 
     echo "status = ${status}"
