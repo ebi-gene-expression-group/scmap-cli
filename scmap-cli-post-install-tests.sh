@@ -53,6 +53,7 @@ mkdir -p $output_dir
 ################################################################################
 
 export test_sce=$output_dir'/test_sce.rds'
+export train_idf=$test_working_dir/'E-ENAD-16.idf.txt'
 export test_sce_processed=$output_dir'/test_sce_processed.rds'
 export select_features_sce=$output_dir'/select_features.rds'
 export select_features_plot=$output_dir'/select_features.png'
@@ -91,6 +92,9 @@ export cell_number_nearest_neighbours=5
 # where one of a chain has completed successfullly.
 
 export use_existing_outputs
+
+# Import IDF file 
+wget "ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/atlas/sc_experiments/E-ENAD-16/E-ENAD-16.idf.txt" -P $test_working_dir
 
 # Derive the tests file name from the script name
 
