@@ -25,6 +25,13 @@ option_list = list(
     help = "Column name in the 'colData' slot of the SingleCellExperiment object containing the cell classification information."
   ),
   make_option(
+    c("-f", "--train-idf"), 
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = 'Path to the training data IDF file (optional)'
+  ),
+  make_option(
     c("-p", "--output-plot-file"),
     action = "store",
     default = NA,
@@ -63,6 +70,16 @@ if (! is.na(opt$output_plot_file)){
   heatmap(as.matrix(metadata(SingleCellExperiment)$scmap_cluster_index))
   dev.off()
 }
+
+# add dataset field to the SingleCellExperiment object 
+if(!is.na(opt$train_idf)){
+    idf = readLines(opt$train_idf)
+    L = idf[grep("ExpressionAtlasAccession", idf)]
+    dataset = unlist(strsplit(L, "\\t"))[2]
+    attributes(SingleCellExperiment)$dataset = dataset
+    } else{
+        attributes(SingleCellExperiment)$dataset = NA
+    }
 
 # Print introspective information
 cat(capture.output(SingleCellExperiment), sep='\n')

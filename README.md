@@ -37,8 +37,9 @@ Here we generate a summary representation of each cluster in the indexed dataset
 ```
 scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds format> \
      --cluster-col <column name where cell types are stored> \
-    --output-object-file <output SingleCellExperiment in .rds format> \
-    --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
+     --train-idf <Path to the training data IDF file (optional)> \
+     --output-object-file <output SingleCellExperiment in .rds format> \
+     --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
 ```
 
 ### Project one dataset to another 
@@ -58,6 +59,7 @@ Here we generate a cell-wise index:
 
 ```
 scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds format> \
+    --train-idf <Path to the training data IDF file (optional)> \
     --number-chunks <number of chunks into which the expr matrix is split> \
     --number-clusters <number of clusters per group for k-means clustering> \
     --output-object-file <output SingleCellExperiment in .rds format>
@@ -84,6 +86,8 @@ scmap_get_std_output.R\
             --predictions-file <Path to the predictions file in text format>\
             --output-table <Path to the final output file in text format>\
             --include-scores <Boolean: Should prediction scores be included in output? Default: FALSE>\
+            --tool <What tool produced output? (scmap-cell or scmap-cluster)>\
+            --index <Path to the index object in .rds format (Optional; required to add dataset of origin to output table)>\
             --sim-col-name <Column name of similarity scores>
 ```
 

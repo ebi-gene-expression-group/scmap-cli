@@ -52,7 +52,7 @@
         skip "$index_cluster_sce exists and use_existing_outputs is set to 'true'"
     fi
    
-    run rm -f $index_cluster_sce && scmap-index-cluster.R --input-object-file $select_features_sce --cluster-col $cluster_col --output-object-file $index_cluster_sce --output-plot-file $index_cluster_plot
+    run rm -f $index_cluster_sce && scmap-index-cluster.R --input-object-file $select_features_sce --cluster-col $cluster_col --train-idf $train_idf --output-object-file $index_cluster_sce --output-plot-file $index_cluster_plot
 
     echo "status = ${status}"
     echo "output = ${output}"
@@ -83,6 +83,7 @@
     run rm -f $index_cell_sce && scmap-index-cell.R\
                                  --input-object-file $select_features_sce\
                                  --output-object-file $index_cell_sce\
+                                 --train-idf $train_idf\
                                  --number-chunks $cells_number_chunks\
                                  --number-clusters $cells_number_clusters\
                                  --random-seed $random_seed
@@ -117,6 +118,8 @@
     run rm -rf $scmap_output_tbl && scmap_get_std_output.R\
                                         --predictions-file $closest_cells_clusters_csv\
                                         --output-table $scmap_output_tbl\
+                                        --index $index_cluster_sce\
+                                        --tool 'scmap-cell'\
                                         --include-scores
 
     echo "status = ${status}"

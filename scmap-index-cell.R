@@ -32,6 +32,13 @@ option_list = list(
     help = 'Number of clusters per group for k-means clustering.'
   ),
   make_option(
+    c("-f", "--train-idf"), 
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = 'Path to the training data IDF file (optional)'
+  ),
+  make_option(
     c("-r", "--random-seed"),
     action = "store",
     default = NULL,
@@ -76,6 +83,16 @@ if (is.null(opt$random_seed)){
 
 # Run indexing function
 SingleCellExperiment <- indexCell(SingleCellExperiment, M = opt$number_chunks, k = opt$number_clusters)
+
+# add dataset field to the SingleCellExperiment object 
+if(!is.na(opt$train_idf)){
+    idf = readLines(opt$train_idf)
+    L = idf[grep("ExpressionAtlasAccession", idf)]
+    dataset = unlist(strsplit(L, "\\t"))[2]
+    attributes(SingleCellExperiment)$dataset = dataset
+    } else{
+        attributes(SingleCellExperiment)$dataset = NA
+    }
 
 # Print introspective information
 cat(capture.output(SingleCellExperiment), sep='\n')
