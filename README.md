@@ -37,7 +37,7 @@ Here we generate a summary representation of each cluster in the indexed dataset
 ```
 scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds format> \
      --cluster-col <column name where cell types are stored> \
-     --train-idf <Path to the training data IDF file (optional)> \
+     --train-id <Training dataset ID (optional)> \
      --output-object-file <output SingleCellExperiment in .rds format> \
      --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
 ```
@@ -59,7 +59,7 @@ Here we generate a cell-wise index:
 
 ```
 scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds format> \
-    --train-idf <Path to the training data IDF file (optional)> \
+    --train-id <Training dataset ID (optional)> \
     --number-chunks <number of chunks into which the expr matrix is split> \
     --number-clusters <number of clusters per group for k-means clustering> \
     --output-object-file <output SingleCellExperiment in .rds format>
