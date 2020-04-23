@@ -25,11 +25,11 @@ option_list = list(
     help = "Column name in the 'colData' slot of the SingleCellExperiment object containing the cell classification information."
   ),
   make_option(
-    c("-f", "--train-idf"), 
+    c("-f", "--train-id"), 
     action = "store",
     default = NA,
     type = 'character',
-    help = 'Path to the training data IDF file (optional)'
+    help = 'ID of the training dataset (optional)'
   ),
   make_option(
     c("-p", "--output-plot-file"),
@@ -72,11 +72,8 @@ if (! is.na(opt$output_plot_file)){
 }
 
 # add dataset field to the SingleCellExperiment object 
-if(!is.na(opt$train_idf)){
-    idf = readLines(opt$train_idf)
-    L = idf[grep("ExpressionAtlasAccession", idf)]
-    dataset = unlist(strsplit(L, "\\t"))[2]
-    attributes(SingleCellExperiment)$dataset = dataset
+if(!is.na(opt$train_id)){
+    attributes(SingleCellExperiment)$dataset = opt$train_id
     } else{
         attributes(SingleCellExperiment)$dataset = NA
     }
