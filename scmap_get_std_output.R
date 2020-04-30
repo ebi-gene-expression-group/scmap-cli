@@ -65,7 +65,7 @@ colnames(output) = col_names
 # add metadata if classifier is specified 
 tool = tolower(opt$tool)
 if(!tool %in% c("scmap-cell", "scmap-cluster")) stop("Incorrect tool name provided")
-system(paste("echo '# tool ", tool, "' >", opt$output_table))
+system(paste("echo '# tool", tool, "' >", opt$output_table))
 if(!is.na(opt$index)){
     cl = readRDS(opt$index)
     dataset = attributes(cl)$dataset
