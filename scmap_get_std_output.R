@@ -50,7 +50,7 @@ option_list = list(
 
 
 opt = wsc_parse_args(option_list, mandatory = c("predictions_file", "output_table", "tool"))
-data = read.csv(file=opt$predictions_file)
+data = read.csv(file=opt$predictions_file, sep = "\t", stringsAsFactors = FALSE)
 output = data[, c('cell', 'combined_labs')]
 # provide scores if specified
 if(!is.na(opt$include_scores)){

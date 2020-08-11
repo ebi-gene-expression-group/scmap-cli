@@ -66,7 +66,7 @@
         skip "$project_sce exists and use_existing_outputs is set to 'true'"
     fi
 
-    run rm -rf $project_sce && scmap-scmap-cluster.R -i $index_cluster_sce -p $test_sce_processed --threshold $cluster_similarity_threshold --output-text-file $project_csv --output-object-file $project_sce
+    run rm -rf $project_sce && scmap-scmap-cluster.R -i $index_cluster_sce -p $test_sce_processed --threshold $cluster_similarity_threshold --output-text-file $project_tsv --output-object-file $project_sce
 
     echo "status = ${status}"
     echo "output = ${output}"
@@ -100,7 +100,7 @@
         skip "$closest_cells_similarities_text_file exists and use_existing_outputs is set to 'true'"
     fi
 
-    run rm -rf $closest_cells_similarities_text_file && scmap-scmap-cell.R -i $index_cell_sce -p $test_sce_processed --number-nearest-neighbours $cell_number_nearest_neighbours --cluster-col $cluster_col --output-object-file $closest_cells_clusters_sce --output-clusters-text-file $closest_cells_clusters_csv --closest-cells-text-file $closest_cells_text_file --closest-cells-similarities-text-file $closest_cells_similarities_text_file
+    run rm -rf $closest_cells_similarities_text_file && scmap-scmap-cell.R -i $index_cell_sce -p $test_sce_processed --number-nearest-neighbours $cell_number_nearest_neighbours --cluster-col $cluster_col --output-object-file $closest_cells_clusters_sce --output-clusters-text-file $closest_cells_clusters_tsv --closest-cells-text-file $closest_cells_text_file --closest-cells-similarities-text-file $closest_cells_similarities_text_file
 
     echo "status = ${status}"
     echo "output = ${output}"
@@ -116,7 +116,7 @@
     fi
 
     run rm -rf $scmap_output_tbl && scmap_get_std_output.R\
-                                        --predictions-file $closest_cells_clusters_csv\
+                                        --predictions-file $closest_cells_clusters_tsv\
                                         --output-table $scmap_output_tbl\
                                         --index $index_cluster_sce\
                                         --tool 'scmap-cell'\

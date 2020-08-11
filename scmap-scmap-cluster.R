@@ -93,7 +93,7 @@ colData(project_sce) <- cbind(colData(project_sce), scmapCluster_results)
 cat(capture.output(project_sce), sep='\n')
 
 # Output assignments to a text format
-write.csv(cbind(cell = colnames(project_sce), scmapCluster_results), file=opt$output_text_file, quote = FALSE)
+write.table(cbind(cell = colnames(project_sce), scmapCluster_results), file=opt$output_text_file, sep = "\t", quote = FALSE)
 
 # Output to a serialized R object
 saveRDS(project_sce, file = opt$output_object_file)

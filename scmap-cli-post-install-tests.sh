@@ -60,14 +60,14 @@ export select_features_plot=$output_dir'/select_features.png'
 export index_cluster_sce=$output_dir'/index_cluster.rds'
 export index_cluster_plot=$output_dir'/index_cluster.png'
 export project_sce=$output_dir'/project_cluster.rds'
-export project_csv=$output_dir'/project_cluster.csv'
+export project_tsv=$output_dir'/project_cluster.tsv'
 
 export index_cell_sce=$output_dir'/index_cell.rds'
 export project_cell_sce=$output_dir'/project_cell.rds'
-export closest_cells_text_file=$output_dir'/closest_cells.csv'
-export closest_cells_similarities_text_file=$output_dir'/closest_cells_similarities.csv'
+export closest_cells_text_file=$output_dir'/closest_cells.tsv'
+export closest_cells_similarities_text_file=$output_dir'/closest_cells_similarities.tsv'
 export closest_cells_clusters_sce=$output_dir'/closest_cells_clusters.rds'
-export closest_cells_clusters_csv=$output_dir'/closest_cells_clusters.csv'
+export closest_cells_clusters_tsv=$output_dir'/closest_cells_clusters.tsv'
 export scmap_output_tbl=$output_dir'/scmap_output_tbl.txt'
 
 ## Test parameters- would form config file in real workflow. DO NOT use these
