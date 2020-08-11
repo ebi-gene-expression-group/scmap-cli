@@ -121,7 +121,7 @@ if (opt$cluster_col %in% colnames(colData(index_sce))){
   colData(project_sce) <- cbind(colData(project_sce), scmapCell_clusters)
   
   # Output assignments to a text format
-  write.csv(cbind(cell = colnames(project_sce), scmapCell_clusters), file=opt$output_clusters_text_file, quote = FALSE, row.names = FALSE)
+  write.table(cbind(cell = colnames(project_sce), scmapCell_clusters), file=opt$output_clusters_text_file, sep = "\t", quote = FALSE, row.names = FALSE)
 }
 
 # Output to a serialized R object if specified
@@ -145,5 +145,5 @@ scmapCell_results <- data.frame(do.call(cbind, lapply(scmapCell_results, functio
 cat(capture.output(project_sce), sep='\n')
 
 # Output assignments to a text format
-write.csv(scmapCell_results[[1]]$cells, file=opt$closest_cells_text_file, quote = FALSE)
-write.csv(scmapCell_results[[1]]$similarities, file=opt$closest_cells_similarities_text_file, quote = FALSE)
+write.table(scmapCell_results[[1]]$cells, file=opt$closest_cells_text_file, sep = "\t", quote = FALSE)
+write.table(scmapCell_results[[1]]$similarities, file=opt$closest_cells_similarities_text_file, sep = "\t", quote = FALSE)
