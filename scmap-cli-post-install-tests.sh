@@ -78,6 +78,7 @@ export scmap_output_tbl=$output_dir'/scmap_output_tbl.txt'
 export n_features=500
 export cluster_col='cell_type1'
 export cluster_similarity_threshold=0.7
+export remove_mat="TRUE"
 
 export random_seed=1
 export cells_number_chunks=50

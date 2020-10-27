@@ -32,6 +32,13 @@ option_list = list(
     help = 'ID of the training dataset (optional)'
   ),
   make_option(
+    c("-r", "--remove-mat"), 
+    action = "store_true",
+    default = FALSE,
+    type = 'logical',
+    help = 'Should expression data be removed from index object? Default: FALSE'
+  ),
+  make_option(
     c("-p", "--output-plot-file"),
     action = "store",
     default = NA,
@@ -77,6 +84,15 @@ if(!is.na(opt$train_id)){
     } else{
         attributes(SingleCellExperiment)$dataset = NA
     }
+
+# Remove expression matrix, if specified
+if(opt$remove_mat){
+    for(assay_type in c('counts', 'normcounts', 'logcounts')){
+        if(assay_type %in% names(assays(SingleCellExperiment))){
+            assays(SingleCellExperiment)[assay_type] = NULL
+        }
+    } 
+}
 
 # Print introspective information
 cat(capture.output(SingleCellExperiment), sep='\n')

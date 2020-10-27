@@ -52,7 +52,7 @@
         skip "$index_cluster_sce exists and use_existing_outputs is set to 'true'"
     fi
    
-    run rm -f $index_cluster_sce && scmap-index-cluster.R --input-object-file $select_features_sce --cluster-col $cluster_col --train-id $train_id --output-object-file $index_cluster_sce --output-plot-file $index_cluster_plot
+    run rm -f $index_cluster_sce && scmap-index-cluster.R --input-object-file $select_features_sce --cluster-col $cluster_col --remove-mat $remove_mat --train-id $train_id --output-object-file $index_cluster_sce --output-plot-file $index_cluster_plot
 
     echo "status = ${status}"
     echo "output = ${output}"
@@ -84,6 +84,7 @@
                                  --input-object-file $select_features_sce\
                                  --output-object-file $index_cell_sce\
                                  --train-id $train_id\
+                                 --remove-mat $remove_mat\
                                  --number-chunks $cells_number_chunks\
                                  --number-clusters $cells_number_clusters\
                                  --random-seed $random_seed
