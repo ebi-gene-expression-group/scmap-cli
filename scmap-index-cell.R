@@ -39,6 +39,13 @@ option_list = list(
     help = 'ID of the training dataset (optional)'
   ),
   make_option(
+    c("-e", "--remove-mat"), 
+    action = "store_true",
+    default = FALSE,
+    type = 'logical',
+    help = 'Should expression data be removed from index object? Default: FALSE'
+  ),
+  make_option(
     c("-r", "--random-seed"),
     action = "store",
     default = NULL,
@@ -82,13 +89,23 @@ if (is.null(opt$random_seed)){
 }
 
 # Run indexing function
-SingleCellExperiment <- indexCell(SingleCellExperiment, M = opt$number_chunks, k = opt$number_clusters)
+SingleCellExperiment <- indexCell(SingleCellExperiment, M = opt$number_chunks,
+                                                        k = opt$number_clusters)
 
 # add dataset field to the SingleCellExperiment object 
 if(!is.na(opt$train_id)){
     attributes(SingleCellExperiment)$dataset = opt$train_id
     } else{
         attributes(SingleCellExperiment)$dataset = NA
+}
+
+# Remove expression matrix, if specified
+if(opt$remove_mat){
+    for(assay_type in c('counts', 'normcounts', 'logcounts')){
+        if(assay_type %in% names(assays(SingleCellExperiment))){
+            assays(SingleCellExperiment)[assay_type] = NULL
+        }
+    } 
 }
 
 # Print introspective information
