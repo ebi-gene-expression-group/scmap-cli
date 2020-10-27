@@ -38,6 +38,7 @@ Here we generate a summary representation of each cluster in the indexed dataset
 scmap-index-cluster.R --input-object-file <input SingleCellExperiment in .rds format> \
      --cluster-col <column name where cell types are stored> \
      --train-id <Training dataset ID (optional)> \
+     --remove-mat <Should expression data be removed from the index? >\
      --output-object-file <output SingleCellExperiment in .rds format> \
      --output-plot-file <optional file name in .png format, for heatmap-style index visualisation>
 ```
@@ -61,6 +62,7 @@ Here we generate a cell-wise index:
 scmap-index-cell.R --input-object-file <input SingleCellExperiment in .rds format> \
     --train-id <Training dataset ID (optional)> \
     --number-chunks <number of chunks into which the expr matrix is split> \
+    --remove-mat <Should expression data be removed from the index? >\
     --number-clusters <number of clusters per group for k-means clustering> \
     --output-object-file <output SingleCellExperiment in .rds format>
 ```
