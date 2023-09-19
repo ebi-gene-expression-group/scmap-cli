@@ -25,6 +25,7 @@ jobs:
 
       - name: Run scmap-cli-post-install-tests.sh
         run: |
+          micromamba activate test-env
           conda env list
           which bats
           ./scmap-cli-post-install-tests.sh
