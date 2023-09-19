@@ -1,0 +1,32 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]  # Add more versions as needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup mamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: test-env.yaml
+          cache-downloads: true
+          channels: conda-forge, bioconda, defaults
+          extra-specs: |
+            python=${{ matrix.python-version }}
+
+      - name: Set PATH for script
+        run: |
+          export PATH=`pwd`:$PATH
+
+      - name: Run scmap-cli-post-install-tests.sh
+        run: |
+          ./scmap-cli-post-install-tests.sh
