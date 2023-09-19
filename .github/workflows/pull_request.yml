@@ -28,5 +28,5 @@ jobs:
       - name: Run scmap-cli-post-install-tests.sh
         shell: bash -el {0}
         run: |
-          which bats
+          export PATH=$( pwd ):$PATH
           ./scmap-cli-post-install-tests.sh
