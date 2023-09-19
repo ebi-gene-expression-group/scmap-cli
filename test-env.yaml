@@ -11,4 +11,4 @@ dependencies:
   - r-workflowscriptscommon
   - bioconductor-scmap<1.7.0
   # for testing
-  - bats
+  - bats-core
