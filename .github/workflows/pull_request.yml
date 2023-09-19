@@ -23,10 +23,6 @@ jobs:
           extra-specs: |
             python=${{ matrix.python-version }}
 
-      - name: Set PATH for script
-        run: |
-          export PATH=`pwd`:$PATH
-
       - name: Run scmap-cli-post-install-tests.sh
         run: |
           ./scmap-cli-post-install-tests.sh
