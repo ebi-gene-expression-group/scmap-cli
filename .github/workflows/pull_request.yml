@@ -26,6 +26,7 @@ jobs:
           post-cleanup: 'all'
 
       - name: Run scmap-cli-post-install-tests.sh
+        shell: bash -el {0}
         run: |
           which bats
           ./scmap-cli-post-install-tests.sh
