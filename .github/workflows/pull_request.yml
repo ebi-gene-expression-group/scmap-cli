@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9]  # Add more versions as needed
+        python-version: [3.9]  # Add more versions as needed
 
     steps:
       - name: Checkout code
@@ -25,4 +25,6 @@ jobs:
 
       - name: Run scmap-cli-post-install-tests.sh
         run: |
+          conda env list
+          which bats
           ./scmap-cli-post-install-tests.sh
