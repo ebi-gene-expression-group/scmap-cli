@@ -55,10 +55,10 @@ if ( ! file.exists(opt$input_object_file)){
 SingleCellExperiment <- readRDS(opt$input_object_file)
 
 if (is.na(opt$output_plot_file)){
-  SingleCellExperiment <- selectFeatures(SingleCellExperiment, suppress_plot = TRUE)
+  SingleCellExperiment <- selectFeatures(SingleCellExperiment, n_features = opt$n_features, suppress_plot = TRUE)
 }else{
   png(file = opt$output_plot_file)
-  SingleCellExperiment <- selectFeatures(SingleCellExperiment, suppress_plot = FALSE)
+  SingleCellExperiment <- selectFeatures(SingleCellExperiment, n_features = opt$n_features, suppress_plot = FALSE)
   dev.off()
 }
 
