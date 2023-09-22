@@ -86,7 +86,7 @@ export cells_number_chunks=50
 export cells_number_clusters=9
 export cell_number_nearest_neighbours=5
 export cell_nearest_neighbours_threshold=1
-export threshold=0.4
+export cell_similarity_threshold=0.4
 
 ################################################################################
 # Test individual scripts
