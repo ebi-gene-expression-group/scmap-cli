@@ -66,6 +66,7 @@ export index_cell_sce=$output_dir'/index_cell.rds'
 export project_cell_sce=$output_dir'/project_cell.rds'
 export closest_cells_text_file=$output_dir'/closest_cells.tsv'
 export closest_cells_similarities_text_file=$output_dir'/closest_cells_similarities.tsv'
+export closest_cells_similarities_text_file_2=$output_dir'/closest_cells_similarities_2.tsv'
 export closest_cells_clusters_sce=$output_dir'/closest_cells_clusters.rds'
 export closest_cells_clusters_tsv=$output_dir'/closest_cells_clusters.tsv'
 export scmap_output_tbl=$output_dir'/scmap_output_tbl.txt'
@@ -84,6 +85,8 @@ export random_seed=1
 export cells_number_chunks=50
 export cells_number_clusters=9
 export cell_number_nearest_neighbours=5
+export cell_nearest_neighbours_threshold=1
+export threshold=0.4
 
 ################################################################################
 # Test individual scripts
