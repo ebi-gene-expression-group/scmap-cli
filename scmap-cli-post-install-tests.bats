@@ -110,6 +110,29 @@
     [ -f  "$closest_cells_similarities_text_file" ]
 }
 
+@test "For each cell in a query dataset, search for the nearest neighbours by cosine distance within a collection of reference datasets. Includes additional parameters for refining the results" {
+    if [ "$use_existing_outputs" = 'true' ] && [ -f "$closest_cells_similarities_text_file_2" ]; then
+        skip "$closest_cells_similarities_text_file_2 exists and use_existing_outputs is set to 'true'"
+    fi
+
+    run rm -rf $closest_cells_similarities_text_file_2 && scmap-scmap-cell.R\
+                                                    -i $index_cell_sce\
+                                                    -p $test_sce_processed\
+                                                    --number-nearest-neighbours $cell_number_nearest_neighbours\
+                                                    --nearest-neighbours-threshold $cell_nearest_neighbours_threshold\
+                                                    --threshold $cell_similarity_threshold\
+                                                    --cluster-col $cluster_col\
+                                                    --output-object-file $closest_cells_clusters_sce\
+                                                    --output-clusters-text-file $closest_cells_clusters_tsv\
+                                                    --closest-cells-text-file $closest_cells_text_file\
+                                                    --closest-cells-similarities-text-file $closest_cells_similarities_text_file_2
+
+    echo "status = ${status}"
+    echo "output = ${output}"
+ 
+    [ "$status" -eq 0 ]
+    [ -f  "$closest_cells_similarities_text_file_2" ]
+}
 
 @test "Obtain standard output" {
     if [ "$use_existing_outputs" = 'true' ] && [ -f "$scmap_output_tbl" ]; then
