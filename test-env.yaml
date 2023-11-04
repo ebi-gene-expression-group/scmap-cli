@@ -1,0 +1,14 @@
+name: test-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base
+  - r-optparse
+  - libpng
+  - r-cairo
+  - r-workflowscriptscommon
+  - bioconductor-scmap<1.7.0
+  # for testing
+  - bats-core

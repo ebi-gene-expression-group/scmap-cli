@@ -73,7 +73,8 @@ scmapCluster_results <- scmapCluster(
   projection = project_sce, 
   index_list = list(
     metadata(index_sce)$scmap_cluster_index
-  )
+  ),
+  threshold = opt$threshold
 )
 
 # Output format anticipates multiple input indexes, let's assume a single input

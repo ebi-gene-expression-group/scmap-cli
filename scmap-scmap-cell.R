@@ -32,6 +32,20 @@ option_list = list(
     help = 'A positive integer specifying the number of nearest neighbours to find.'
   ),
   make_option(
+    c("-n", "--nearest-neighbours-threshold"),
+    action = "store",
+    default = 3,
+    type = 'numeric',
+    help = 'A positive integer specifying the number of matching nearest neighbours required to label a cell.'
+  ),
+  make_option(
+    c("-r", "--threshold"),
+    action = "store",
+    default = 0.7,
+    type = 'numeric',
+    help = 'Threshold on similarity (or probability for SVM and RF).'
+  ),
+  make_option(
     c("-c", "--cluster-col"),
     action = "store",
     default = "cell_type1",
@@ -104,7 +118,9 @@ if (opt$cluster_col %in% colnames(colData(index_sce))){
     scmapCell_results, 
     list(
       as.character(colData(index_sce)[[opt$cluster_col]])
-    )
+    ),
+    w=opt$nearest_neighbours_threshold,
+    threshold=opt$threshold
   )
   
   # Output format anticipates multiple input indexes, let's assume a single input
